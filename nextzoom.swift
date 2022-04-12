@@ -30,7 +30,7 @@ func zoomMeetingFromText(text: String) -> (match: Bool, url: String) {
 
     let line_tail_range = Range(m.range(at: 3), in: text)
     if let lr = line_tail_range {
-        let match = pwd_re.firstMatch(in: text, options: [], range: NSRange(lr.lowerBound...lr.upperBound, in:text))
+        let match = pwd_re.firstMatch(in: text, options: [], range: NSRange(lr, in:text))
         if let pm = match {
             zoom_url = zoom_url + "&pwd=" + text[Range(pm.range(at: 1), in: text)!]
         }
