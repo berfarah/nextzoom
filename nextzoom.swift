@@ -12,7 +12,7 @@ import Darwin.C.stdlib
 import EventKit
 
 func zoomMeetingFromText(text: String) -> (match: Bool, url: String) {
-    let re = try! NSRegularExpression(pattern: #"https://(\S*zoom.us)/j/(\w+)(.*)$"#, options: [.anchorsMatchLines])
+    let re = try! NSRegularExpression(pattern: #"https://([^\s\"'<]*zoom.us)/j/(\w+)([^\s\"'<]*)"#, options: [.anchorsMatchLines])
     let pwd_re = try! NSRegularExpression(pattern: #"pwd=(\w+)"#, options: [])
 
     let range = NSRange(text.startIndex..<text.endIndex, in: text)
