@@ -39,6 +39,24 @@ func zoomMeetingFromText(text: String) -> (match: Bool, url: String) {
     return (true, zoom_url)
 }
 
+func googleMeetingFromText(text: String) -> (match: Bool, url: String) {
+    let re = try! NSRegularExpression(pattern: #"https://meet.google.com/([\w-]*)"#, options: [.anchorsMatchLines])
+
+    let range = NSRange(text.startIndex..<text.endIndex, in: text)
+    let match = re.firstMatch(in: text, options: [], range: range)
+
+    if match == nil {
+        return (false, "")
+    }
+
+    let m = match!
+
+    let meeting_id = text[Range(m.range(at: 1), in: text)!]
+    let meet_url = "https://meet.google.com/" + meeting_id
+
+    return (true, meet_url)
+}
+
 do {
     let store = EKEventStore()
     switch EKEventStore.authorizationStatus(for: .event) {
@@ -109,9 +127,15 @@ do {
             NSLog("Location:")
             NSLog(event.location!)
 
-            let result = zoomMeetingFromText(text: event.location!)
-            if result.match {
-                print(result.url)
+            let zoom_result = zoomMeetingFromText(text: event.location!)
+            if zoom_result.match {
+                print(zoom_result.url)
+                exit(0)
+            }
+
+            let google_result = googleMeetingFromText(text: event.location!)
+            if google_result.match {
+                print(google_result.url)
                 exit(0)
             }
         }
@@ -120,9 +144,15 @@ do {
             NSLog("Notes:")
             NSLog(event.notes!)
 
-            let result = zoomMeetingFromText(text: event.notes!)
-            if result.match {
-                print(result.url)
+            let zoom_result = zoomMeetingFromText(text: event.notes!)
+            if zoom_result.match {
+                print(zoom_result.url)
+                exit(0)
+            }
+
+            let google_result = googleMeetingFromText(text: event.notes!)
+            if google_result.match {
+                print(google_result.url)
                 exit(0)
             }
         }

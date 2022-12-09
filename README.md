@@ -1,8 +1,8 @@
 # Next Zoom Meeting
 
-Single-purpose binary to join the next zoom meeting. Usage:
+Single-purpose binary to join the next zoom or google meet meeting. Usage:
 ```
-open `<directory/to/binary>/nextzoom`
+open `<directory/to/binary>/nextmtg`
 ```
 
 This is a spiritual fork of [this gist](https://gist.github.com/zmij/c80d6e947bcceaf85ba5c33cf3783d46).
@@ -10,7 +10,7 @@ This is a spiritual fork of [this gist](https://gist.github.com/zmij/c80d6e947bc
 ## Build
 
 ```
-swiftc nextzoom.swift
+swiftc nextmtg.swift
 ```
 
 ## How I'm using it
@@ -20,7 +20,7 @@ swiftc nextzoom.swift
 Keyword: join
 Run Script:
 ```
-open `<directory/to/binary>/nextzoom`
+open `<directory/to/binary>/nextmtg`
 ```
 ### Stream Deck
 
